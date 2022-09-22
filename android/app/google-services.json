@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "924677761113",
+    "project_id": "gbkhackathon",
+    "storage_bucket": "gbkhackathon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:924677761113:android:91183dec0adff7c29be948",
+        "android_client_info": {
+          "package_name": "com.example.gbk_hackathon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "924677761113-a520b5hau0i9g4bqn8l9m7c06n3akn2h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwK8yxaCw56Jr-wwb75U9BHyQY1UC5Nuk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "924677761113-a520b5hau0i9g4bqn8l9m7c06n3akn2h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "924677761113-lt1se3gtphujethasqvvn9br62rb3k58.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gbkHackathon"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
