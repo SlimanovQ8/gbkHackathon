@@ -1,6 +1,9 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class AddKid extends StatefulWidget {
   AddKid({Key? key}) : super(key: key);
@@ -8,74 +11,43 @@ class AddKid extends StatefulWidget {
   @override
   State<AddKid> createState() => _AddKidState();
 }
+String _selectedDate = 'Tap to select date';
 
 class _AddKidState extends State<AddKid> {
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? d = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2030),
+    );
+    if (d != null)
+      setState(() {
+        _selectedDate = d.year.toString() + '-' + d.month.toString() + '-' + d.day.toString();
+      });
+  }
   var kidName = TextEditingController();
 
   var dateOfBirth = TextEditingController();
   final _picker = ImagePicker();
-  File? _image;
+  XFile? _image;
   bool is0bscurePassword = true;
 
+  bool chk = false;
   @override
+
   Widget build(BuildContext context) {
+
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 241, 240, 240),
         body: Container(
             padding: EdgeInsets.only(left: 15, top: 20, right: 15),
             child: GestureDetector(
                 onTap: () {
-                  print("edit image test");
-                  showModalBottomSheet(
-                      context: context,
-                      builder: ((builder) => Container(
-                          height: 200,
-                          width: MediaQuery.of(context).size.width,
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                "Choose Profile Photo",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              SizedBox(
-                                height: 30,
-                                width: 100,
-                              ),
-                              ElevatedButton.icon(
-                                icon: Icon(Icons.camera),
-                                onPressed: () async {
-                                  final XFile? image = await _picker.pickImage(
-                                      source: ImageSource.camera);
-                                  setState(() {
-                                    _image = File(image!.path);
-                                  });
-                                },
-                                label: Text("From Camera  "),
-                              ),
-                              ElevatedButton.icon(
-                                icon: Icon(Icons.image),
-                                onPressed: () async {
-                                  final XFile? image = await _picker.pickImage(
-                                      source: ImageSource.gallery);
-                                  setState(() {
-                                    _image = File(image!.path);
-                                  });
-                                },
-                                label: Text("From Gallary   "),
-                              ),
-                              ElevatedButton.icon(
-                                icon: Icon(Icons.delete),
-                                onPressed: () {
-                                  setState(() {
-                                    _image = null;
-                                  });
-                                },
-                                label: Text("Remove Image"),
-                              )
-                            ],
-                          ))));
+
                 },
                 child: ListView(children: [
                   Center(
@@ -90,50 +62,60 @@ class _AddKidState extends State<AddKid> {
                   SizedBox(
                     height: 25,
                   ),
-                  Center(
-                      child: Stack(
-                    children: [
-                      Container(
-                        width: 130,
-                        height: 130,
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(8, 4, 8, 0),
+                    child: Container(
+                        height: height / 4,
+                        width: width,
                         decoration: BoxDecoration(
-                          border: Border.all(width: 4, color: Colors.white),
-                          boxShadow: [
-                            BoxShadow(
-                              spreadRadius: 2,
-                              blurRadius: 10,
-                              color: Colors.black.withOpacity(0.1),
-                            )
-                          ],
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: _image != null
-                                ? NetworkImage('')
-                                : NetworkImage(_image.toString()),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  width: 4,
-                                  color: Colors.white,
-                                ),
-                                color: Colors.black.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(12),
+                            color: Color.fromARGB(255, 194, 194, 194)),
+                        child: chk == false
+                            ? SizedBox.fromSize(
+                          child: Material(
+                            color: Color.fromARGB(255, 194, 194, 194),
+                            child: InkWell(
+                              splashColor: Colors.black87,
+                              onTap: () async {
+                                final XFile? image = await _picker.pickImage(
+                                    source: ImageSource.gallery);
+                                setState(() {
+                                  _image = XFile(image!.path) ;
+                                  print(_image);
+                                  chk = true;
+
+                                });
+
+                              },
+
+                              child: Column(
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.image,
+                                    size: (height + width) / 7.5,
+                                    color: Colors.white70,
+                                  ), // <-- Icon
+                                  Text(
+                                    "Pick Image from Gallery",
+                                    style: TextStyle(
+                                      fontSize: (height + width) / 90,
+                                    ),
+                                  ), // <-- Text
+                                ],
                               ),
-                              child: Icon(
-                                Icons.edit,
-                                color: Colors.black,
-                              )))
-                    ],
-                  )),
+                            ),
+                          ),
+                        )
+
+
+                            : Image.file(
+                            File(_image!.path),
+                            fit: BoxFit.fitWidth)
+                    ) ,
+                  ),
+
                   SizedBox(
                     height: 30,
                     width: 30,
@@ -148,17 +130,52 @@ class _AddKidState extends State<AddKid> {
                   SizedBox(
                     height: 10,
                   ),
-                  Container(
-                    height: 45,
-                    child: ElevatedButton(
-                      child: Text("Date Of Birth"),
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                          textStyle: TextStyle(fontSize: 20),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
+                  Padding(
+
+                    padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
+                    child:Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Container(
+
+                          decoration: const BoxDecoration(
+                              border: Border(
+                                top: BorderSide(width: 1.0, color: Colors.black),
+                                left: BorderSide(width: 1.0, color: Colors.black),
+                                right: BorderSide(width: 1.0, color: Colors.black),
+                                bottom: BorderSide(width: 1.0, color: Colors.black),
+                              ),
+                              borderRadius: BorderRadius.all(Radius.circular(5))
                           ),
-                          primary: Theme.of(context).primaryColor),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                InkWell(
+                                  child: Text(
+                                      _selectedDate,
+                                      textAlign: TextAlign.center,
+
+                                      style: TextStyle(color: Color(0xFF000000),
+                                          fontSize: 24)
+                                  ),
+                                  onTap: (){
+                                    _selectDate(context);
+                                  },
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.calendar_today),
+                                  tooltip: 'Tap to open date picker',
+                                  onPressed: () {
+                                    _selectDate(context);
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Column(
@@ -171,15 +188,7 @@ class _AddKidState extends State<AddKid> {
                           height: 49,
                           child: ElevatedButton(
                             onPressed: () async {
-                              // User user = (User(
-                              //     username: usernameController.text,
-                              //     password: passwordController.text,
-                              //     image: _image?.path));
-                              // await context
-                              //     .read<UserProvider>()
-                              //     .editProfileProvider(user);
-                              // context.push("/SecondMain");
-                              // print("testing edit profile credintials");
+                              AddKid();
                             },
                             child: Text(
                               "SAVE",
@@ -224,37 +233,17 @@ class _AddKidState extends State<AddKid> {
                   )
                 ]))));
   }
+  String name = "";
+void AddKid() async
+{
+  setState(() {
+   FirebaseFirestore.instance.collection("Kids").add({
+      "name": kidName.text,
+      "dob": _selectedDate,
+     "parentID": FirebaseAuth.instance.currentUser!.uid,
+      "image": _image!.path,
 
-  // Widget buildTextField(String labelText, String placeholder, String controller,
-  //     bool isPasswordTextField, Widget prefixIcon) {
-  //   return Padding(
-  //       padding: EdgeInsets.fromLTRB(25, 15, 25, 6),
-  //       child: TextField(
-  //           obscureText: isPasswordTextField ? is0bscurePassword : false,
-  //           decoration: InputDecoration(
-  //               focusedBorder: OutlineInputBorder(
-  //                 borderRadius: BorderRadius.circular(12.5),
-  //                 borderSide: const BorderSide(
-  //                     width: 1, color: Color.fromRGBO(236, 229, 199, 10)),
-  //               ),
-  //               enabledBorder: OutlineInputBorder(
-  //                 borderRadius: BorderRadius.circular(12.5),
-  //                 borderSide: const BorderSide(
-  //                     width: 1, color: Color.fromRGBO(236, 229, 199, 10)),
-  //               ),
-  //               filled: true,
-  //               fillColor: Colors.white,
-  //               suffixIcon: isPasswordTextField
-  //                   ? IconButton(
-  //                       icon: Icon(Icons.remove_red_eye, color: Colors.grey),
-  //                       onPressed: () {})
-  //                   : null, // IconButton
-  //               contentPadding: EdgeInsets.only(bottom: 5),
-  //               labelText: labelText,
-  //               floatingLabelBehavior: FloatingLabelBehavior.always,
-  //               hintText: placeholder,
-  //               hintStyle: TextStyle(
-  //                 color: Colors.grey,
-  //               ))));
-  // }
+    });
+  });
+}
 }
