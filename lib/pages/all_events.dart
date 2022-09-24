@@ -38,16 +38,9 @@ class AllEvents extends StatelessWidget {
             height: 15,
           ),
           Container(
-            height: 200,
+            height: 300,
             padding: EdgeInsets.symmetric(horizontal: 15),
-            child: ListView(children: [
-              InkWell(
-                onTap: () {
-                  // context.push("");
-                },
-                child: EventsCard(),
-              ),
-            ]),
+            child: EventsCard()
           ),
         ],
       ),

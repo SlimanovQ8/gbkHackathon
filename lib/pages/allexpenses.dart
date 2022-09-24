@@ -47,9 +47,9 @@ class _AllExpensesState extends State<AllExpenses> {
           Container(
             height: 200,
             padding: EdgeInsets.symmetric(horizontal: 15),
-            child: ListView(children: [
+            child:
               ExpensesCard(),
-            ]),
+
           )
         ],
       ),
