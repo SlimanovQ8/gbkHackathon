@@ -21,15 +21,22 @@ class AllEvents extends StatelessWidget {
         title: Text("All Events"),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.asset("assets/images/Claps.gif"),
           SizedBox(
             height: 25,
           ),
-          Text("All Challenges"),
-          // SizedBox(
-          //   height: 15,
-          // ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              "All Challenges",
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
           Container(
             height: 200,
             padding: EdgeInsets.symmetric(horizontal: 15),

@@ -8,13 +8,13 @@ class ExpensesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.grey[200],
+      elevation: 5,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(
             "Title",
-            style: Theme.of(context).textTheme.subtitle1,
+            style: Theme.of(context).textTheme.headline2,
           ),
           SizedBox(
             height: 15,
@@ -22,13 +22,36 @@ class ExpensesCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "234KD",
-                style: Theme.of(context).textTheme.bodyText1,
+              Column(
+                children: [
+                  Text(
+                    "Amount:",
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "234KD",
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                ],
               ),
-              Text(
-                "12/2/2022",
-                style: Theme.of(context).textTheme.bodyText2,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Date:",
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "12/2/2022",
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                ],
               ),
             ],
           ),

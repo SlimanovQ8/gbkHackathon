@@ -128,12 +128,13 @@ class _MainPageState extends State<MainPage> {
                         child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                          padding: const EdgeInsets.fromLTRB(12, 15, 12, 0),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Hi Family Name Here',
+                                'Welcome to N9or',
+                                style: Theme.of(context).textTheme.bodyText1,
                               ),
                               Container(),
                             ],
@@ -156,71 +157,80 @@ class _MainPageState extends State<MainPage> {
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: 16, vertical: 16),
-                          child: Container(
-                            height: 150,
-                            padding: EdgeInsets.all(16),
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.topRight,
-                                  colors: [Colors.orange, Colors.pink]),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  // ignore: prefer_const_literals_to_create_immutables
-                                  children: [
-                                    // ignore: prefer_const_constructors
-                                    Text(
-                                      "Total Saving",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
+                          child: Card(
+                            elevation: 5,
+                            child: Container(
+                              height: 150,
+                              padding: EdgeInsets.all(16),
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.topRight,
+                                    colors: [
+                                      Color.fromARGB(255, 255, 92, 86),
+                                      Color.fromARGB(255, 233, 30, 30)
+                                    ]),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    // ignore: prefer_const_literals_to_create_immutables
+                                    children: [
+                                      // ignore: prefer_const_constructors
+                                      Text(
+                                        "Total Saving",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      "1500 KD",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
+                                      Text(
+                                        "1500 KD",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  // ignore: prefer_const_literals_to_create_immutables
-                                  children: [
-                                    // ignore: prefer_const_constructors
-                                    Text(
-                                      "Current Month Expenses",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    // ignore: prefer_const_literals_to_create_immutables
+                                    children: [
+                                      // ignore: prefer_const_constructors
+                                      Text(
+                                        "Current Month Expenses",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      "1500 KD",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
+                                      SizedBox(
+                                        height: 10,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                      Text(
+                                        "1500 KD",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -231,126 +241,165 @@ class _MainPageState extends State<MainPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              child: Text("My Kids"),
+                              padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                              child: Text(
+                                "My Kids",
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
                             ),
-                                FutureBuilder(
-                                    future: FirebaseFirestore.instance
-                                        .collection('Kids')
-                                        .where('parentID', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-                                        .get(),
-                                    builder:
-                                        (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                                      if (snapshot.data == null) {
-                                        return Container(
-                                          child: Center(
-                                            child: CircularProgressIndicator(),
-                                          ),
-                                        );
-                                      }
-                                      else if (snapshot.data!.docs.length == 0){
-
-
-                                        return new SingleChildScrollView(
-                                          child: Center(
-
-                                            ),
-
-                                        );
-                                      }
-                                      else
-                                      {
-                                        return                             SingleChildScrollView(
-                                          scrollDirection: Axis.horizontal,
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: List.generate(
-                                                  snapshot.data!.docs.length +1,
-                                                      (index) => Container(
-                                                    margin: EdgeInsets.symmetric(
-                                                        vertical: 15, horizontal: 4),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                      MainAxisAlignment.spaceBetween,
-                                                      mainAxisSize: MainAxisSize.min,
-                                                      crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                      children: <Widget>[
-                                                        Container(
-                                                            child: InkWell(
-                                                              onTap: () {
-                                                                index == snapshot.data!.docs.length ?
-                                                                    context.push("/addkid"):
-                                                                context.push("/kiddetail");
-                                                              },
-                                                              child: new CircleAvatar(
-                                                                  maxRadius: 44,
-                                                                  minRadius: 44,
-                                                                  child: Image.asset(
-                                                                    index  == snapshot.data!.docs.length
-                                                                        ? "assets/icons/add.png"
-                                                                        : "assets/icons/event.png",
-                                                                    width: 40,
-                                                                    height: 40,
-                                                                    color: Theme.of(context)
-                                                                        .primaryColor,
-                                                                  ),
-                                                                  backgroundColor:
-                                                                  Colors.white),
-                                                            ),
-                                                            padding: const EdgeInsets.all(
-                                                                1.0), // borde width
-                                                            decoration: new BoxDecoration(
-                                                              color: const Color(
-                                                                  0x231873e8), // border color
-                                                              shape: BoxShape.circle,
-                                                            )),
-                                                        Flexible(
-                                                          child: Padding(
-                                                            child: Text(
-                                                                index == snapshot.data!.docs.length
-                                                                    ? "Add Kid"
-                                                                    :  snapshot.data!.docs[index].get("name"),
-                                                                style: const TextStyle(
-                                                                    color: const Color(
-                                                                        0xff000000),
-                                                                    fontWeight:
-                                                                    FontWeight.w500,
-                                                                    fontFamily:
-                                                                    "AvenirNext",
-                                                                    fontStyle:
-                                                                    FontStyle.normal,
-                                                                    fontSize: 12)),
-                                                            padding: EdgeInsets.fromLTRB(
-                                                                0, 8, 0, 15),
+                            FutureBuilder(
+                                future: FirebaseFirestore.instance
+                                    .collection('Kids')
+                                    .where('parentID',
+                                        isEqualTo: FirebaseAuth
+                                            .instance.currentUser!.uid)
+                                    .get(),
+                                builder: (context,
+                                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  if (snapshot.data == null) {
+                                    return Container(
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    );
+                                  } else if (snapshot.data!.docs.length == 0) {
+                                    return new SingleChildScrollView(
+                                      child: Center(),
+                                    );
+                                  } else {
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 15),
+                                      child: SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: List.generate(
+                                                snapshot.data!.docs.length + 1,
+                                                (index) => Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      vertical: 15,
+                                                      horizontal: 4),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: <Widget>[
+                                                      Container(
+                                                          child: InkWell(
+                                                            onTap: () {
+                                                              index ==
+                                                                      snapshot
+                                                                          .data!
+                                                                          .docs
+                                                                          .length
+                                                                  ? context.push(
+                                                                      "/addkid")
+                                                                  : context.push(
+                                                                      "/kiddetail");
+                                                            },
+                                                            child:
+                                                                new CircleAvatar(
+                                                                    maxRadius:
+                                                                        44,
+                                                                    minRadius:
+                                                                        44,
+                                                                    child: Image
+                                                                        .asset(
+                                                                      index ==
+                                                                              snapshot.data!.docs.length
+                                                                          ? "assets/icons/add.png"
+                                                                          : "assets/icons/event.png",
+                                                                      width: 40,
+                                                                      height:
+                                                                          40,
+                                                                      color: Theme.of(
+                                                                              context)
+                                                                          .primaryColor,
+                                                                    ),
+                                                                    backgroundColor:
+                                                                        Colors
+                                                                            .white),
                                                           ),
+                                                          padding: const EdgeInsets
+                                                                  .all(
+                                                              1.0), // borde width
+                                                          decoration:
+                                                              new BoxDecoration(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .primaryColor, // border color
+                                                            shape:
+                                                                BoxShape.circle,
+                                                          )),
+                                                      Flexible(
+                                                        child: Padding(
+                                                          child: Text(
+                                                              index ==
+                                                                      snapshot
+                                                                          .data!
+                                                                          .docs
+                                                                          .length
+                                                                  ? "Add Kid"
+                                                                  : snapshot
+                                                                      .data!
+                                                                      .docs[
+                                                                          index]
+                                                                      .get(
+                                                                          "name"),
+                                                              style: const TextStyle(
+                                                                  color:
+                                                                      const Color(
+                                                                          0xff000000),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontFamily:
+                                                                      "AvenirNext",
+                                                                  fontStyle:
+                                                                      FontStyle
+                                                                          .normal,
+                                                                  fontSize:
+                                                                      12)),
+                                                          padding: EdgeInsets
+                                                              .fromLTRB(
+                                                                  0, 8, 0, 15),
                                                         ),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                        );
-
-
-
-                                        }
-                                    }),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                }),
                           ])),
                       SliverToBoxAdapter(
                         child: Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Upcoming Expenses"),
+                              Text(
+                                "Upcoming Expenses",
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
                               TextButton(
                                 child: Text("See All"),
                                 onPressed: () {
@@ -366,187 +415,124 @@ class _MainPageState extends State<MainPage> {
                         child: FutureBuilder(
                             future: FirebaseFirestore.instance
                                 .collection('Expense')
-                                .where('parentID', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+                                .where('parentID',
+                                    isEqualTo:
+                                        FirebaseAuth.instance.currentUser!.uid)
                                 .get(),
-                            builder:
-                                (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                            builder: (context,
+                                AsyncSnapshot<QuerySnapshot> snapshot) {
                               if (snapshot.data == null) {
                                 return Container(
+                                  margin: EdgeInsets.symmetric(vertical: 15),
                                   child: Center(
                                     child: CircularProgressIndicator(),
                                   ),
                                 );
-                              }
-                              else if (snapshot.data!.docs.length == 0){
-
-
+                              } else if (snapshot.data!.docs.length == 0) {
                                 return new SingleChildScrollView(
-                                  child: Center(
-
-                                  ),
-
+                                  child: Center(),
                                 );
-                              }
-                              else
-                              {
-                                return  CarouselSlider(
-                                    items: snapshot.data!.docs.map((e)  => InkWell(
-                                        onTap: () {},
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    // elevation: 4,
-                                    clipBehavior: Clip.antiAlias,
-                                    child: Container(
-                                      width: 250,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                        // crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          // Expanded(
-                                          //   child: Padding(
-                                          //     padding: const EdgeInsets.all(10.0),
-                                          //     child: ClipRRect(
-                                          //       borderRadius: BorderRadius.circular(25.0),
-                                          //       child: Image.network(
-                                          //         "",
-                                          //         // This line makes the width of this widget
-                                          //         width: width,
-                                          //         fit: BoxFit.cover,
-                                          //       ),
-                                          //     ),
-                                          //   ),
-                                          // ),
-                                          const SizedBox(height: 4),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 8.0),
-                                            child: Text(
-                                              e.get("title"),
-                                              style: TextStyle(
-                                                  fontSize: 26,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 8.0),
-                                            child: Text(
-                                              e.get("amount") + "KD",
-                                              style: TextStyle(
-                                                  fontSize: 26,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
+                              } else {
+                                return CarouselSlider(
+                                  items: snapshot.data!.docs
+                                      .map((e) => InkWell(
+                                            onTap: () {},
+                                            child: Card(
+                                              elevation: 5,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              // elevation: 4,
+                                              clipBehavior: Clip.antiAlias,
+                                              child: Container(
+                                                width: 250,
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  // crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    // Expanded(
+                                                    //   child: Padding(
+                                                    //     padding: const EdgeInsets.all(10.0),
+                                                    //     child: ClipRRect(
+                                                    //       borderRadius: BorderRadius.circular(25.0),
+                                                    //       child: Image.network(
+                                                    //         "",
+                                                    //         // This line makes the width of this widget
+                                                    //         width: width,
+                                                    //         fit: BoxFit.cover,
+                                                    //       ),
+                                                    //     ),
+                                                    //   ),
+                                                    // ),
+                                                    const SizedBox(height: 4),
+                                                    Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 8.0),
+                                                      child: Text(
+                                                        e.get("title"),
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 26,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 8.0),
+                                                      child: Text(
+                                                        e.get("amount") + "KD",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 26,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ),
 
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 8.0),
-                                            child: Text(e.get("amountdate")),
-                                          ),
-                                          const SizedBox(height: 8),
-                                        ],
-                                      ),
-                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 8.0),
+                                                      child: Text(
+                                                        e.get("amountdate"),
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(height: 8),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ))
+                                      .toList(),
+                                  // Slider Container properties
+                                  options: CarouselOptions(
+                                    height: height * 0.2,
+                                    enlargeCenterPage: true,
+                                    autoPlay: false,
+                                    aspectRatio: 1,
+                                    //  16 / 12,
+                                    autoPlayCurve: Curves.fastOutSlowIn,
+                                    enableInfiniteScroll: true,
+                                    autoPlayAnimationDuration:
+                                        Duration(milliseconds: 800),
+                                    viewportFraction: 0.6,
                                   ),
-                                ) ).toList()
-
-
-,
-                                    // Slider Container properties
-                                    options: CarouselOptions(
-                                      height: height * 0.2,
-                                      enlargeCenterPage: true,
-                                      autoPlay: false,
-                                      aspectRatio: 1,
-                                      //  16 / 12,
-                                      autoPlayCurve: Curves.fastOutSlowIn,
-                                      enableInfiniteScroll: true,
-                                      autoPlayAnimationDuration:
-                                      Duration(milliseconds: 800),
-                                      viewportFraction: 0.6,
-                                    ),
-
                                 );
-
-
-
                               }
                             }),
                       ),
 
-                      SliverToBoxAdapter(
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                          child: Text("Upcoming Events"),
-                        ),
-                      ),
-                      SliverToBoxAdapter(
-                        child: CarouselSlider(
-                          items: [
-                            InkWell(
-                              onTap: () {},
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                // elevation: 4,
-                                clipBehavior: Clip.antiAlias,
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  // crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(height: 4),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
-                                      child: Text(
-                                        "school Expenses",
-                                        style: TextStyle(
-                                            fontSize: 26,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
-                                      child: Text(
-                                        "3000kd",
-                                        style: TextStyle(
-                                            fontSize: 26,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
-                                      child: Text("10/20/2020"),
-                                    ),
-                                    const SizedBox(height: 8),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-
-                          // Slider Container properties
-                          options: CarouselOptions(
-                            height: height * 0.2,
-                            enlargeCenterPage: true,
-                            autoPlay: false,
-                            aspectRatio: 1,
-                            //  16 / 12,
-                            autoPlayCurve: Curves.fastOutSlowIn,
-                            enableInfiniteScroll: true,
-                            autoPlayAnimationDuration:
-                                Duration(milliseconds: 800),
-                            viewportFraction: 0.6,
-                          ),
-                        ),
-                      ),
                       // SliverGrid(
                       //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       //       crossAxisCount: 2,

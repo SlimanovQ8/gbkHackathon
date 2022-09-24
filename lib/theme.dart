@@ -6,7 +6,6 @@ ThemeData myTheme = ThemeData(
   secondaryHeaderColor: Color(0xFF0c0f0a),
   dividerColor: Color(0xFFBFBFBF),
   // cardColor: Color.fromARGB(255, 255, 169, 123),
-
   // ICONS
   iconTheme: const IconThemeData(
     color: Color.fromARGB(255, 191, 0, 0),
@@ -84,14 +83,14 @@ ThemeData myTheme = ThemeData(
         width: 1,
         color: Color.fromARGB(255, 184, 184, 184),
       ),
-      borderRadius: BorderRadius.circular(5),
+      borderRadius: BorderRadius.circular(12.5),
     ),
     focusedBorder: OutlineInputBorder(
       borderSide: const BorderSide(
         width: 2,
         color: Color.fromARGB(255, 191, 0, 0),
       ),
-      borderRadius: BorderRadius.circular(5),
+      borderRadius: BorderRadius.circular(12.5),
     ),
     errorBorder: const OutlineInputBorder(
       borderSide: BorderSide(
@@ -109,7 +108,11 @@ ThemeData myTheme = ThemeData(
       fontSize: 35,
       fontWeight: FontWeight.bold,
     ),
-
+    headline2: TextStyle(
+      color: Color(0xFF0c0f0a),
+      fontSize: 30,
+      fontWeight: FontWeight.bold,
+    ),
     // section headings and amount text
     subtitle1: TextStyle(
       color: Color(0xFF0c0f0a),

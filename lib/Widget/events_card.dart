@@ -8,9 +8,9 @@ class EventsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.grey[200],
+      elevation: 5,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -24,6 +24,9 @@ class EventsCard extends StatelessWidget {
                 style: Theme.of(context).textTheme.subtitle1,
               ),
             ],
+          ),
+          SizedBox(
+            height: 15,
           ),
           Text(
             "Description",
