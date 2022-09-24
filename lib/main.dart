@@ -5,10 +5,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:gbk_hackathon/pages/MainPage.dart';
 import 'package:gbk_hackathon/pages/SignUpPage.dart';
 import 'package:gbk_hackathon/pages/loginPage.dart';
+import 'package:gbk_hackathon/pages/welcomingpage.dart';
 import 'package:gbk_hackathon/theme.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:go_router/go_router.dart';
 
 void main() async {
@@ -35,7 +35,8 @@ class MyApp extends StatelessWidget {
   }
 
   final _router = GoRouter(initialLocation: "/", routes: [
-    GoRoute(path: "/", builder: (context, state) => MyHomePage()),
+    GoRoute(path: "/", builder: (context, state) => WelcomePage()),
+    GoRoute(path: "/homepage", builder: (context, state) => MainPage()),
     GoRoute(path: "/signIn", builder: (context, state) => LoginPage()),
     GoRoute(path: "/signUp", builder: (context, state) => SignUpPage()),
   ]);
