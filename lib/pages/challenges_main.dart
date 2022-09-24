@@ -17,29 +17,35 @@ class ChallengesPage extends StatelessWidget {
         child: Icon(Icons.add),
       ),
       appBar: AppBar(
+        centerTitle: true,
         title: Text("All Challenges"),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.asset("assets/images/Puzzle.png"),
           SizedBox(
             height: 25,
           ),
-          Text("All Challenges"),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Text(
+              "All Challenges",
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+          ),
           // SizedBox(
           //   height: 15,
           // ),
           Container(
             height: 200,
             padding: EdgeInsets.symmetric(horizontal: 15),
-            child:
-              InkWell(
-                onTap: () {
-                  // context.push("");
-                },
-                child: ChallengesCard(),
-              ),
-
+            child: InkWell(
+              onTap: () {
+                // context.push("");
+              },
+              child: ChallengesCard(),
+            ),
           ),
         ],
       ),
