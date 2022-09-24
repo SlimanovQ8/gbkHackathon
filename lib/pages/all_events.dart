@@ -18,6 +18,7 @@ class AllEvents extends StatelessWidget {
         child: Icon(Icons.add),
       ),
       appBar: AppBar(
+        centerTitle: true,
         title: Text("All Events"),
       ),
       body: Column(
@@ -30,7 +31,7 @@ class AllEvents extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Text(
-              "All Challenges",
+              "All Events",
               style: Theme.of(context).textTheme.bodyText1,
             ),
           ),
@@ -38,10 +39,9 @@ class AllEvents extends StatelessWidget {
             height: 15,
           ),
           Container(
-            height: 300,
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            child: EventsCard()
-          ),
+              height: 300,
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: EventsCard()),
         ],
       ),
     );
