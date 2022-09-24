@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:gbk_hackathon/pages/MainPage.dart';
 import 'package:gbk_hackathon/pages/SignUpPage.dart';
+import 'package:gbk_hackathon/pages/addKid.dart';
 import 'package:gbk_hackathon/pages/loginPage.dart';
 import 'package:gbk_hackathon/pages/welcomingpage.dart';
+import 'package:gbk_hackathon/theme.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
@@ -29,14 +31,16 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routeInformationParser: _router.routeInformationParser,
       routerDelegate: _router.routerDelegate,
+      theme: myTheme,
     );
   }
 
   final _router = GoRouter(initialLocation: "/", routes: [
-    GoRoute(path: "/", builder: (context, state) => WelcomePage()),
+    GoRoute(path: "/wait", builder: (context, state) => WelcomePage()),
     GoRoute(path: "/homepage", builder: (context, state) => MainPage()),
     GoRoute(path: "/signIn", builder: (context, state) => LoginPage()),
     GoRoute(path: "/signUp", builder: (context, state) => SignUpPage()),
+    GoRoute(path: "/", builder: (context, state) => AddKid()),
   ]);
 }
 
