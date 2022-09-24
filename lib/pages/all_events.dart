@@ -17,10 +17,7 @@ class AllEvents extends StatelessWidget {
         },
         child: Icon(Icons.add),
       ),
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text("All Events"),
-      ),
+
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -39,7 +36,7 @@ class AllEvents extends StatelessWidget {
             height: 15,
           ),
           Container(
-              height: 300,
+              height: 350,
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: EventsCard()),
         ],
