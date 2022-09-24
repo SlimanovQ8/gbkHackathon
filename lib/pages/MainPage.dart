@@ -1,3 +1,5 @@
+import 'package:carousel_slider/carousel_options.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -5,6 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gbk_hackathon/main.dart';
+import 'package:go_router/go_router.dart';
 
 import '../classes/CustomAnimatedBottomBar.dart';
 import 'loginPage.dart';
@@ -129,11 +132,8 @@ class _MainPageState extends State<MainPage> {
                             children: [
                               Text(
                                 'Hi Family Name Here',
-
                               ),
-                              Container(
-
-                              ),
+                              Container(),
                             ],
                           ),
                         ),
@@ -143,222 +143,415 @@ class _MainPageState extends State<MainPage> {
                 )),
           ];
         },
-        body: CustomScrollView(
-          scrollDirection: Axis.vertical,
-          slivers: <Widget>[
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                child: Container(
-                  height: 150,
-                  padding: EdgeInsets.all(16),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.topRight,
-                        colors: [Colors.orange, Colors.pink]),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          // ignore: prefer_const_constructors
-                          Text(
-                            "Total Saving",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
+        body: currentIndex == 1
+            ? Container()
+            : currentIndex == 2
+                ? Container()
+                : CustomScrollView(
+                    scrollDirection: Axis.vertical,
+                    slivers: <Widget>[
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 16),
+                          child: Container(
+                            height: 150,
+                            padding: EdgeInsets.all(16),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.topRight,
+                                  colors: [Colors.orange, Colors.pink]),
+                              borderRadius: BorderRadius.circular(4),
                             ),
-                          ),
-                          Text(
-                            "1500 KD",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          // ignore: prefer_const_constructors
-                          Text(
-                            "Current Month Expenses",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                          Text(
-                            "1500 KD",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SliverToBoxAdapter(
-                child:
-                    Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: Text("My Kids"),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisSize: MainAxisSize.max,
-                      children: List.generate(
-                        8,
-                        (index) => Container(
-                          margin:
-                              EdgeInsets.symmetric(vertical: 15, horizontal: 4),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                  child: new CircleAvatar(
-                                      maxRadius: 44,
-                                      minRadius: 44,
-                                      child: Image.asset( index == 7?
-                                        "assets/icons/add.png" : "assets/icons/event.png",
-                                        width: 40,
-                                        height: 40,
-                                        color: Theme.of(context).primaryColor,
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  children: [
+                                    // ignore: prefer_const_constructors
+                                    Text(
+                                      "Total Saving",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
                                       ),
-                                      backgroundColor: Colors.white),
-                                  padding:
-                                      const EdgeInsets.all(1.0), // borde width
-                                  decoration: new BoxDecoration(
-                                    color:
-                                        const Color(0x231873e8), // border color
-                                    shape: BoxShape.circle,
-                                  )),
-                              Flexible(
-                                child: Padding(
-                                  child: Text(index == 7? "Add Event" :"Events",
-                                      style: const TextStyle(
-                                          color: const Color(0xff000000),
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: "AvenirNext",
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 12)),
-                                  padding: EdgeInsets.fromLTRB(0, 8, 0, 15),
+                                    ),
+                                    Text(
+                                      "1500 KD",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ],
                                 ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  children: [
+                                    // ignore: prefer_const_constructors
+                                    Text(
+                                      "Current Month Expenses",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    Text(
+                                      "1500 KD",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SliverToBoxAdapter(
+                          child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              child: Text("My Kids"),
+                            ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: List.generate(
+                                      8,
+                                      (index) => Container(
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: 15, horizontal: 4),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            Container(
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    context.push("/kiddetail");
+                                                  },
+                                                  child: new CircleAvatar(
+                                                      maxRadius: 44,
+                                                      minRadius: 44,
+                                                      child: Image.asset(
+                                                        index == 7
+                                                            ? "assets/icons/add.png"
+                                                            : "assets/icons/event.png",
+                                                        width: 40,
+                                                        height: 40,
+                                                        color: Theme.of(context)
+                                                            .primaryColor,
+                                                      ),
+                                                      backgroundColor:
+                                                          Colors.white),
+                                                ),
+                                                padding: const EdgeInsets.all(
+                                                    1.0), // borde width
+                                                decoration: new BoxDecoration(
+                                                  color: const Color(
+                                                      0x231873e8), // border color
+                                                  shape: BoxShape.circle,
+                                                )),
+                                            Flexible(
+                                              child: Padding(
+                                                child: Text(
+                                                    index == 7
+                                                        ? "Add Kid"
+                                                        : "Aziz",
+                                                    style: const TextStyle(
+                                                        color: const Color(
+                                                            0xff000000),
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            "AvenirNext",
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: 12)),
+                                                padding: EdgeInsets.fromLTRB(
+                                                    0, 8, 0, 15),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              
+                            ),
+                          ])),
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Upcoming Expenses"),
+                              TextButton(
+                                child: Text("See All"),
+                                onPressed: () {
+                                  context.push("/allexpenses");
+                                },
+                              ),
                             ],
                           ),
                         ),
                       ),
+                      SliverToBoxAdapter(
+                        child: CarouselSlider(
+                          items: [
+                            InkWell(
+                              onTap: () {},
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                // elevation: 4,
+                                clipBehavior: Clip.antiAlias,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  // crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    // Expanded(
+                                    //   child: Padding(
+                                    //     padding: const EdgeInsets.all(10.0),
+                                    //     child: ClipRRect(
+                                    //       borderRadius: BorderRadius.circular(25.0),
+                                    //       child: Image.network(
+                                    //         "",
+                                    //         // This line makes the width of this widget
+                                    //         width: width,
+                                    //         fit: BoxFit.cover,
+                                    //       ),
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                    const SizedBox(height: 4),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Text(
+                                        "school Expenses",
+                                        style: TextStyle(
+                                            fontSize: 26,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Text(
+                                        "3000kd",
+                                        style: TextStyle(
+                                            fontSize: 26,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
 
-                    ),
-                  ],
-                ),
-              )
-            ])),
-            SliverGrid(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 1.2,
-                  mainAxisSpacing: 10.0,
-                  crossAxisSpacing: 10.0),
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  return ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      color: Colors.white70,
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            left: TitleFontSize * 5.75,
-                            top: TitleFontSize * 4.25,
-                            child: ImageIcon(
-                              AssetImage("assets/icons/event.png"),
-                              color: Color(0xFFCACACA),
-                              size: TitleFontSize * 4,
-                            ),
-                          ),
-                          ClipOval(
-                            child: Material(
-                              color: Colors.redAccent, // Button color
-                              child: SizedBox(
-                                  width: TitleFontSize * 3.5,
-                                  height: TitleFontSize * 3.5,
-                                  child: ImageIcon(
-                                    AssetImage("assets/icons/event.png"),
-                                    size: 0,
-                                    color: Color.fromARGB(255, 230, 230, 230),
-                                  )),
-                            ),
-                          ),
-                          Positioned(
-                            left: TitleFontSize * 0,
-                            bottom: 0,
-                            top: TitleFontSize * 3.75,
-                            right: 0,
-                            child: Text(
-                              "Events",
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 0, 0, 0),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Text("10/20/2020"),
+                                    ),
+                                    const SizedBox(height: 8),
+                                  ],
+                                ),
                               ),
-                            ),
+                            )
+                          ],
+
+                          // Slider Container properties
+                          options: CarouselOptions(
+                            height: height * 0.2,
+                            enlargeCenterPage: true,
+                            autoPlay: false,
+                            aspectRatio: 1,
+                            //  16 / 12,
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            enableInfiniteScroll: true,
+                            autoPlayAnimationDuration:
+                                Duration(milliseconds: 800),
+                            viewportFraction: 0.6,
                           ),
-                          Positioned(
-                            left: TitleFontSize * 0,
-                            bottom: 0,
-                            top: TitleFontSize * 5.25,
-                            right: 0,
-                            child: Text(
-                              "service_",
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Color.fromARGB(255, 0, 0, 0),
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
-                  );
-                },
-                childCount: 4,
-              ),
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.only(bottom: 80.0),
-            )
-          ],
-        ),
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          child: Text("Upcoming Events"),
+                        ),
+                      ),
+                      SliverToBoxAdapter(
+                        child: CarouselSlider(
+                          items: [
+                            InkWell(
+                              onTap: () {},
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                // elevation: 4,
+                                clipBehavior: Clip.antiAlias,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  // crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(height: 4),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Text(
+                                        "school Expenses",
+                                        style: TextStyle(
+                                            fontSize: 26,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Text(
+                                        "3000kd",
+                                        style: TextStyle(
+                                            fontSize: 26,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Text("10/20/2020"),
+                                    ),
+                                    const SizedBox(height: 8),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+
+                          // Slider Container properties
+                          options: CarouselOptions(
+                            height: height * 0.2,
+                            enlargeCenterPage: true,
+                            autoPlay: false,
+                            aspectRatio: 1,
+                            //  16 / 12,
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            enableInfiniteScroll: true,
+                            autoPlayAnimationDuration:
+                                Duration(milliseconds: 800),
+                            viewportFraction: 0.6,
+                          ),
+                        ),
+                      ),
+                      // SliverGrid(
+                      //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      //       crossAxisCount: 2,
+                      //       childAspectRatio: 1.2,
+                      //       mainAxisSpacing: 10.0,
+                      //       crossAxisSpacing: 10.0),
+                      //   delegate: SliverChildBuilderDelegate(
+                      //     (context, index) {
+                      //       return ClipRRect(
+                      //         borderRadius: BorderRadius.circular(12),
+                      //         child: Container(
+                      //           padding: const EdgeInsets.all(8),
+                      //           color: Colors.white70,
+                      //           child: Stack(
+                      //             children: [
+                      //               Positioned(
+                      //                 left: TitleFontSize * 5.75,
+                      //                 top: TitleFontSize * 4.25,
+                      //                 child: ImageIcon(
+                      //                   AssetImage("assets/icons/event.png"),
+                      //                   color: Color(0xFFCACACA),
+                      //                   size: TitleFontSize * 4,
+                      //                 ),
+                      //               ),
+                      //               ClipOval(
+                      //                 child: Material(
+                      //                   color: Colors.redAccent, // Button color
+                      //                   child: SizedBox(
+                      //                       width: TitleFontSize * 3.5,
+                      //                       height: TitleFontSize * 3.5,
+                      //                       child: ImageIcon(
+                      //                         AssetImage("assets/icons/event.png"),
+                      //                         size: 0,
+                      //                         color: Color.fromARGB(255, 230, 230, 230),
+                      //                       )),
+                      //                 ),
+                      //               ),
+                      //               Positioned(
+                      //                 left: TitleFontSize * 0,
+                      //                 bottom: 0,
+                      //                 top: TitleFontSize * 3.75,
+                      //                 right: 0,
+                      //                 child: Text(
+                      //                   "Events",
+                      //                   style: TextStyle(
+                      //                     fontSize: 24,
+                      //                     fontWeight: FontWeight.bold,
+                      //                     color: Color.fromARGB(255, 0, 0, 0),
+                      //                   ),
+                      //                 ),
+                      //               ),
+                      //               Positioned(
+                      //                 left: TitleFontSize * 0,
+                      //                 bottom: 0,
+                      //                 top: TitleFontSize * 5.25,
+                      //                 right: 0,
+                      //                 child: Text(
+                      //                   "service_",
+                      //                   style: TextStyle(
+                      //                     fontSize: 18,
+                      //                     color: Color.fromARGB(255, 0, 0, 0),
+                      //                   ),
+                      //                 ),
+                      //               ),
+                      //             ],
+                      //           ),
+                      //         ),
+                      //       );
+                      //     },
+                      //     childCount: 4,
+                      //   ),
+                      // ),
+                      SliverPadding(
+                        padding: const EdgeInsets.only(bottom: 80.0),
+                      )
+                    ],
+                  ),
       ),
       bottomNavigationBar: CustomAnimatedBottomBar(
         containerHeight: 70,
@@ -367,7 +560,6 @@ class _MainPageState extends State<MainPage> {
         showElevation: true,
         itemCornerRadius: 12,
         curve: Curves.ease,
-
         onItemSelected: (index) => setState(() => currentIndex = index),
         items: <BottomNavyBarItem>[
           BottomNavyBarItem(
@@ -384,7 +576,6 @@ class _MainPageState extends State<MainPage> {
             inactiveColor: Theme.of(context).dividerColor,
             textAlign: TextAlign.center,
           ),
-
           BottomNavyBarItem(
             icon: Icon(Icons.task),
             title: Text(
@@ -402,10 +593,9 @@ class _MainPageState extends State<MainPage> {
             textAlign: TextAlign.center,
           ),
         ],
-      )
-      ,
+      ),
     );
-
   }
-  int currentIndex= 0;
+
+  int currentIndex = 2;
 }
