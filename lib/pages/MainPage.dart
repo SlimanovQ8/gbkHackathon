@@ -7,6 +7,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gbk_hackathon/main.dart';
+import 'package:gbk_hackathon/pages/all_events.dart';
+import 'package:gbk_hackathon/pages/challenges_main.dart';
 import 'package:go_router/go_router.dart';
 
 import '../classes/CustomAnimatedBottomBar.dart';
@@ -144,9 +146,9 @@ class _MainPageState extends State<MainPage> {
           ];
         },
         body: currentIndex == 1
-            ? Container()
+            ? AllEvents()
             : currentIndex == 2
-                ? Container()
+                ? ChallengesPage()
                 : CustomScrollView(
                     scrollDirection: Axis.vertical,
                     slivers: <Widget>[
@@ -597,5 +599,5 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  int currentIndex = 2;
+  int currentIndex = 0;
 }
