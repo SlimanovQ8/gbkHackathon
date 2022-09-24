@@ -24,7 +24,10 @@ class _AddExpensesState extends State<AddExpenses> {
     );
     if (d != null)
       setState(() {
-        _selectedDate = d.year.toString() + '-' + d.month.toString() + '-' +
+        _selectedDate = d.year.toString() +
+            '-' +
+            d.month.toString() +
+            '-' +
             d.day.toString();
       });
   }
@@ -32,7 +35,6 @@ class _AddExpensesState extends State<AddExpenses> {
   var title = TextEditingController();
 
   var amount = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -62,37 +64,32 @@ class _AddExpensesState extends State<AddExpenses> {
                   height: 15,
                 ),
                 Padding(
-
                   padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       Container(
-
                         decoration: const BoxDecoration(
                             border: Border(
                               top: BorderSide(width: 1.0, color: Colors.black),
                               left: BorderSide(width: 1.0, color: Colors.black),
-                              right: BorderSide(width: 1.0,
-                                  color: Colors.black),
-                              bottom: BorderSide(width: 1.0,
-                                  color: Colors.black),
+                              right:
+                                  BorderSide(width: 1.0, color: Colors.black),
+                              bottom:
+                                  BorderSide(width: 1.0, color: Colors.black),
                             ),
-                            borderRadius: BorderRadius.all(Radius.circular(5))
-                        ),
+                            borderRadius: BorderRadius.all(Radius.circular(5))),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               InkWell(
-                                child: Text(
-                                    _selectedDate,
+                                child: Text(_selectedDate,
                                     textAlign: TextAlign.center,
-
-                                    style: TextStyle(color: Color(0xFF000000),
-                                        fontSize: 24)
-                                ),
+                                    style: TextStyle(
+                                        color: Color(0xFF000000),
+                                        fontSize: 24)),
                                 onTap: () {
                                   _selectDate(context);
                                 },
@@ -111,7 +108,6 @@ class _AddExpensesState extends State<AddExpenses> {
                     ],
                   ),
                 ),
-
                 SizedBox(
                   height: 15,
                 ),
@@ -122,13 +118,13 @@ class _AddExpensesState extends State<AddExpenses> {
                       onPressed: () {
                         showDialog(
                           context: context,
-                          builder: (context) =>
-                          new AlertDialog(
+                          builder: (context) => new AlertDialog(
                             content: Text('Expense Added'),
                             actions: <Widget>[
                               new FlatButton(
                                 onPressed: () {
                                   AddExpense();
+                                  context.push("/");
                                 },
                                 child: new Text('Done'),
                               ),
@@ -146,15 +142,13 @@ class _AddExpensesState extends State<AddExpenses> {
         ));
   }
 
-  void AddExpense() async
-  {
+  void AddExpense() async {
     setState(() {
       FirebaseFirestore.instance.collection("Expense").add({
         "title": title.text,
         "amount": amount.text,
-            "amountdate": _selectedDate,
+        "amountdate": _selectedDate,
         "parentID": FirebaseAuth.instance.currentUser!.uid,
-
       });
     });
   }

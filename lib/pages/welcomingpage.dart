@@ -21,7 +21,7 @@ class WelcomePage extends StatelessWidget {
           Image(
               width: 275,
               height: 300,
-              image: AssetImage("assets/images/gbk-logo.png")),
+              image: AssetImage("assets/images/LogoMain.png")),
           Text(
             "Welcome",
             style: TextStyle(

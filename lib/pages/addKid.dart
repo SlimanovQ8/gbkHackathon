@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
@@ -11,10 +12,10 @@ class AddKid extends StatefulWidget {
   @override
   State<AddKid> createState() => _AddKidState();
 }
-String _selectedDate = 'Tap to select date';
+
+String _selectedDate = 'Birth Day';
 
 class _AddKidState extends State<AddKid> {
-
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? d = await showDatePicker(
       context: context,
@@ -24,9 +25,14 @@ class _AddKidState extends State<AddKid> {
     );
     if (d != null)
       setState(() {
-        _selectedDate = d.year.toString() + '-' + d.month.toString() + '-' + d.day.toString();
+        _selectedDate = d.year.toString() +
+            '-' +
+            d.month.toString() +
+            '-' +
+            d.day.toString();
       });
   }
+
   var kidName = TextEditingController();
 
   var dateOfBirth = TextEditingController();
@@ -36,19 +42,24 @@ class _AddKidState extends State<AddKid> {
 
   bool chk = false;
   @override
-
   Widget build(BuildContext context) {
-
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 241, 240, 240),
+        appBar: AppBar(
+          title: Text("Add your kid"),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            context.push("/addexpense");
+          },
+          child: Icon(Icons.add),
+        ),
+        backgroundColor: Colors.white,
         body: Container(
             padding: EdgeInsets.only(left: 15, top: 20, right: 15),
             child: GestureDetector(
-                onTap: () {
-
-                },
+                onTap: () {},
                 child: ListView(children: [
                   Center(
                     child: Padding(
@@ -72,50 +83,43 @@ class _AddKidState extends State<AddKid> {
                             color: Color.fromARGB(255, 194, 194, 194)),
                         child: chk == false
                             ? SizedBox.fromSize(
-                          child: Material(
-                            color: Color.fromARGB(255, 194, 194, 194),
-                            child: InkWell(
-                              splashColor: Colors.black87,
-                              onTap: () async {
-                                final XFile? image = await _picker.pickImage(
-                                    source: ImageSource.gallery);
-                                setState(() {
-                                  _image = XFile(image!.path) ;
-                                  print(_image);
-                                  chk = true;
-
-                                });
-
-                              },
-
-                              child: Column(
-                                mainAxisAlignment:
-                                MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.image,
-                                    size: (height + width) / 7.5,
-                                    color: Colors.white70,
-                                  ), // <-- Icon
-                                  Text(
-                                    "Pick Image from Gallery",
-                                    style: TextStyle(
-                                      fontSize: (height + width) / 90,
+                                child: Material(
+                                  color: Color.fromARGB(255, 194, 194, 194),
+                                  child: InkWell(
+                                    splashColor: Colors.black87,
+                                    onTap: () async {
+                                      final XFile? image =
+                                          await _picker.pickImage(
+                                              source: ImageSource.gallery);
+                                      setState(() {
+                                        _image = XFile(image!.path);
+                                        print(_image);
+                                        chk = true;
+                                      });
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.image,
+                                          size: (height + width) / 7.5,
+                                          color: Colors.white70,
+                                        ), // <-- Icon
+                                        Text(
+                                          "Pick Image from Gallery",
+                                          style: TextStyle(
+                                            fontSize: (height + width) / 90,
+                                          ),
+                                        ), // <-- Text
+                                      ],
                                     ),
-                                  ), // <-- Text
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-
-
-                            : Image.file(
-                            File(_image!.path),
-                            fit: BoxFit.fitWidth)
-                    ) ,
+                                  ),
+                                ),
+                              )
+                            : Image.file(File(_image!.path),
+                                fit: BoxFit.fitWidth)),
                   ),
-
                   SizedBox(
                     height: 30,
                     width: 30,
@@ -130,37 +134,38 @@ class _AddKidState extends State<AddKid> {
                   SizedBox(
                     height: 10,
                   ),
+                  Center(child: Text("Date of birth")),
                   Padding(
-
                     padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
-                    child:Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         Container(
-
                           decoration: const BoxDecoration(
                               border: Border(
-                                top: BorderSide(width: 1.0, color: Colors.black),
-                                left: BorderSide(width: 1.0, color: Colors.black),
-                                right: BorderSide(width: 1.0, color: Colors.black),
-                                bottom: BorderSide(width: 1.0, color: Colors.black),
+                                top:
+                                    BorderSide(width: 1.0, color: Colors.black),
+                                left:
+                                    BorderSide(width: 1.0, color: Colors.black),
+                                right:
+                                    BorderSide(width: 1.0, color: Colors.black),
+                                bottom:
+                                    BorderSide(width: 1.0, color: Colors.black),
                               ),
-                              borderRadius: BorderRadius.all(Radius.circular(5))
-                          ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5))),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 InkWell(
-                                  child: Text(
-                                      _selectedDate,
+                                  child: Text(_selectedDate,
                                       textAlign: TextAlign.center,
-
-                                      style: TextStyle(color: Color(0xFF000000),
-                                          fontSize: 24)
-                                  ),
-                                  onTap: (){
+                                      style: TextStyle(
+                                          color: Color(0xFF000000),
+                                          fontSize: 24)),
+                                  onTap: () {
                                     _selectDate(context);
                                   },
                                 ),
@@ -212,7 +217,9 @@ class _AddKidState extends State<AddKid> {
                           width: 340,
                           height: 49,
                           child: OutlinedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                context.pop();
+                              },
                               child: Text(
                                 "Cancel",
                                 style: TextStyle(
@@ -233,17 +240,16 @@ class _AddKidState extends State<AddKid> {
                   )
                 ]))));
   }
-  String name = "";
-void AddKid() async
-{
-  setState(() {
-   FirebaseFirestore.instance.collection("Kids").add({
-      "name": kidName.text,
-      "dob": _selectedDate,
-     "parentID": FirebaseAuth.instance.currentUser!.uid,
-      "image": _image!.path,
 
+  String name = "";
+  void AddKid() async {
+    setState(() {
+      FirebaseFirestore.instance.collection("Kids").add({
+        "name": kidName.text,
+        "dob": _selectedDate,
+        "parentID": FirebaseAuth.instance.currentUser!.uid,
+        "image": _image!.path,
+      });
     });
-  });
-}
+  }
 }

@@ -133,7 +133,7 @@ class _MainPageState extends State<MainPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Welcome to N9or',
+                                'Welcome to N9or Plus',
                                 style: Theme.of(context).textTheme.bodyText1,
                               ),
                               Container(),
@@ -175,32 +175,8 @@ class _MainPageState extends State<MainPage> {
                               ),
                               child: Column(
                                 children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    // ignore: prefer_const_literals_to_create_immutables
-                                    children: [
-                                      // ignore: prefer_const_constructors
-                                      Text(
-                                        "Total Saving",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                      Text(
-                                        "1500 KD",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
                                   SizedBox(
-                                    height: 15,
+                                    height: 25,
                                   ),
                                   Column(
                                     mainAxisAlignment:
@@ -622,7 +598,7 @@ class _MainPageState extends State<MainPage> {
         items: <BottomNavyBarItem>[
           BottomNavyBarItem(
             icon: Icon(Icons.home),
-            title: Text('home'),
+            title: Text('Home'),
             activeColor: Theme.of(context).primaryColor,
             inactiveColor: Theme.of(context).dividerColor,
             textAlign: TextAlign.center,

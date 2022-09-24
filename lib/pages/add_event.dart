@@ -18,7 +18,6 @@ class _AddEventState extends State<AddEvent> {
   var amount = TextEditingController();
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         appBar: AppBar(
           title: Text("Add Event"),
@@ -70,6 +69,7 @@ class _AddEventState extends State<AddEvent> {
                             actions: <Widget>[
                               new FlatButton(
                                 onPressed: () {
+                                  context.pop();
                                 },
                                 child: new Text('Done'),
                               ),
@@ -87,15 +87,13 @@ class _AddEventState extends State<AddEvent> {
         ));
   }
 
-  void AddExpense() async
-  {
+  void AddExpense() async {
     setState(() {
       FirebaseFirestore.instance.collection("Events").add({
         "title": title.text,
         "description": description.text,
         "amount": amount.text,
         "parentID": FirebaseAuth.instance.currentUser!.uid,
-
       });
     });
   }

@@ -45,11 +45,9 @@ class _AllExpensesState extends State<AllExpenses> {
             height: 15,
           ),
           Container(
-            height: 200,
+            height: 500,
             padding: EdgeInsets.symmetric(horizontal: 15),
-            child:
-              ExpensesCard(),
-
+            child: ExpensesCard(),
           )
         ],
       ),
