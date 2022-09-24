@@ -151,5 +151,15 @@ class _AddExpensesState extends State<AddExpenses> {
         "parentID": FirebaseAuth.instance.currentUser!.uid,
       });
     });
+    final result =
+    await FirebaseFirestore.instance.collection('Users').doc(FirebaseAuth.instance.currentUser!.uid).get();
+    setState(() {
+      int a = int.parse(amount.text) + int.parse(result.get("expenses"));
+      FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid).update(
+          {
+            "expenses": a.toString(),
+          });
+    });
+
   }
 }

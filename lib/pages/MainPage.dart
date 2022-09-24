@@ -195,14 +195,45 @@ class _MainPageState extends State<MainPage> {
                                       SizedBox(
                                         height: 10,
                                       ),
-                                      Text(
-                                        "1500 KD",
+                              FutureBuilder(
+                                  future: FirebaseFirestore.instance
+                                      .collection('Users')
+                                      .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
+                                      .get(),
+                                  builder:
+                                      (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                                    if (snapshot.data == null) {
+                                      return Container(
+                                        child: Center(
+                                          child: CircularProgressIndicator(),
+                                        ),
+                                      );
+                                    }
+                                    else if (snapshot.data!.docs.length == 0){
+
+
+                                      return new SingleChildScrollView(
+                                        child: Center(
+
+                                        ),
+
+                                      );
+                                    }
+                                    else
+                                    {
+                                      return  Text(
+                                        snapshot.data!.docs[0].get("expenses"),
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
                                         ),
-                                      ),
+                                      );
+
+
+                                    }
+                                  })
+
                                     ],
                                   ),
                                 ],
