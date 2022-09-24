@@ -5,7 +5,7 @@ ThemeData myTheme = ThemeData(
   primaryColor: Color(0xFFf75600),
   secondaryHeaderColor: Color(0xFF0c0f0a),
   dividerColor: Color(0xFFBFBFBF),
-  cardColor: Color.fromARGB(255, 255, 169, 123),
+  // cardColor: Color.fromARGB(255, 255, 169, 123),
 
   // ICONS
   iconTheme: const IconThemeData(
@@ -15,6 +15,11 @@ ThemeData myTheme = ThemeData(
         primary: const Color(0xFFf75600),
       ),
 
+// flaoting theme color
+
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: Color(0xFFf75600),
+  ),
   // APP BAR THEME
   appBarTheme: const AppBarTheme(
     elevation: 0,
@@ -109,6 +114,7 @@ ThemeData myTheme = ThemeData(
     subtitle1: TextStyle(
       color: Color(0xFF0c0f0a),
       fontSize: 20,
+      fontWeight: FontWeight.bold,
     ),
 
     // details text
