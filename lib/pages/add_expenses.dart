@@ -151,8 +151,8 @@ class _AddExpensesState extends State<AddExpenses> {
     setState(() {
       FirebaseFirestore.instance.collection("Expense").add({
         "title": title.text,
-        "amount"
-            "date": _selectedDate,
+        "amount": amount.text,
+            "amountdate": _selectedDate,
         "parentID": FirebaseAuth.instance.currentUser!.uid,
 
       });
