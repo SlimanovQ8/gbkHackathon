@@ -32,14 +32,14 @@ class ChallengesPage extends StatelessWidget {
           Container(
             height: 200,
             padding: EdgeInsets.symmetric(horizontal: 15),
-            child: ListView(children: [
+            child:
               InkWell(
                 onTap: () {
                   // context.push("");
                 },
                 child: ChallengesCard(),
               ),
-            ]),
+
           ),
         ],
       ),

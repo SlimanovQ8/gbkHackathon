@@ -1,16 +1,24 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:go_router/go_router.dart';
 
-class AddEvent extends StatelessWidget {
+class AddEvent extends StatefulWidget {
   const AddEvent({Key? key}) : super(key: key);
 
   @override
+  State<AddEvent> createState() => _AddEventState();
+}
+
+class _AddEventState extends State<AddEvent> {
+  var title = TextEditingController();
+  var description = TextEditingController();
+  var amount = TextEditingController();
+  @override
   Widget build(BuildContext context) {
-    var title = TextEditingController();
-    var description = TextEditingController();
-    var amount = TextEditingController();
+
     return Scaffold(
         appBar: AppBar(
           title: Text("Add Event"),
@@ -53,6 +61,8 @@ class AddEvent extends StatelessWidget {
                   children: [
                     ElevatedButton(
                       onPressed: () {
+                        AddExpense();
+
                         showDialog(
                           context: context,
                           builder: (context) => new AlertDialog(
@@ -60,7 +70,6 @@ class AddEvent extends StatelessWidget {
                             actions: <Widget>[
                               new FlatButton(
                                 onPressed: () {
-                                  context.pop();
                                 },
                                 child: new Text('Done'),
                               ),
@@ -76,5 +85,18 @@ class AddEvent extends StatelessWidget {
             ),
           ),
         ));
+  }
+
+  void AddExpense() async
+  {
+    setState(() {
+      FirebaseFirestore.instance.collection("Events").add({
+        "title": title.text,
+        "description": description.text,
+        "amount": amount.text,
+        "parentID": FirebaseAuth.instance.currentUser!.uid,
+
+      });
+    });
   }
 }
