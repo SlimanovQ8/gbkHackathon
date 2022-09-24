@@ -24,10 +24,13 @@ class WelcomePage extends StatelessWidget {
               image: AssetImage("assets/images/gbk-logo.png")),
           Text(
             "Welcome",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).primaryColor),
           ),
           Text(
-            "To Yahaloo",
+            "To N9or",
             style: TextStyle(
               fontSize: 20,
             ),
@@ -38,21 +41,8 @@ class WelcomePage extends StatelessWidget {
               controller: familyName,
               // style: const TextStyle(fontSize: 12),
               decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                hintText: 'Enter Family Name',
-                prefixIcon: Icon(Icons.family_restroom),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.5),
-                  borderSide: const BorderSide(
-                      width: 1, color: Color.fromRGBO(236, 229, 199, 10)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.5),
-                  borderSide: const BorderSide(
-                      width: 1, color: Color.fromRGBO(236, 229, 199, 10)),
-                ),
-              ),
+                  prefixIcon: Icon(Icons.family_restroom),
+                  hintText: "Enter Family Name"),
             ),
           ),
           Padding(
@@ -61,37 +51,27 @@ class WelcomePage extends StatelessWidget {
               controller: income,
               // style: const TextStyle(fontSize: 12),
               decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  hintText: 'Enter Family Income',
-                  prefixIcon: Icon(Icons.money),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12.5),
-                    borderSide: BorderSide(
-                        width: 1, color: Color.fromRGBO(236, 229, 199, 10)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.5),
-                      borderSide: const BorderSide(
-                          width: 1, color: Color.fromRGBO(236, 229, 199, 10)))),
+                  hintText: "Enter Family Income",
+                  prefixIcon: Icon(Icons.money)),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(25, 50, 25, 25),
+            padding: const EdgeInsets.fromLTRB(25, 15, 25, 25),
             child: SizedBox(
               width: 340,
               height: 49,
               child: ElevatedButton(
-                  onPressed: () async {
-                    context.push("/homepage");
-                  },
-                  child: Text("Welcome"),
-                  style: ElevatedButton.styleFrom(
-                      textStyle: TextStyle(fontSize: 20),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.5),
-                      ),
-                      primary: Color.fromARGB(246, 9, 111, 237))),
+                onPressed: () async {
+                  context.push("/homepage");
+                },
+                child: Text("Welcome"),
+                style: ElevatedButton.styleFrom(
+                    textStyle: TextStyle(fontSize: 20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.5),
+                    ),
+                    primary: Theme.of(context).primaryColor),
+              ),
             ),
           ),
           // Text("Forget Password"),
