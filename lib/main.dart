@@ -5,7 +5,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:gbk_hackathon/pages/MainPage.dart';
 import 'package:gbk_hackathon/pages/SignUpPage.dart';
 import 'package:gbk_hackathon/pages/addKid.dart';
+import 'package:gbk_hackathon/pages/add_challenge.dart';
 import 'package:gbk_hackathon/pages/add_expenses.dart';
+import 'package:gbk_hackathon/pages/all_events.dart';
 import 'package:gbk_hackathon/pages/allexpenses.dart';
 import 'package:gbk_hackathon/pages/loginPage.dart';
 import 'package:gbk_hackathon/pages/welcomingpage.dart';
@@ -14,6 +16,7 @@ import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 
+import 'pages/add_event.dart';
 import 'pages/kiddetail.dart';
 
 void main() async {
@@ -39,10 +42,8 @@ class MyApp extends StatelessWidget {
     );
   }
 
-
   final _router = GoRouter(initialLocation: "/", routes: [
     GoRoute(path: "/", builder: (context, state) => WelcomePage()),
-
     GoRoute(path: "/homepage", builder: (context, state) => MainPage()),
     GoRoute(path: "/page", builder: (context, state) => MyHomePage()),
     GoRoute(path: "/signIn", builder: (context, state) => LoginPage()),
@@ -51,6 +52,9 @@ class MyApp extends StatelessWidget {
     GoRoute(path: "/kiddetail", builder: (context, state) => KidDetail()),
     GoRoute(path: "/addexpense", builder: (context, state) => AddExpenses()),
     GoRoute(path: "/allexpenses", builder: (context, state) => AllExpenses()),
+    GoRoute(path: "/addchallenge", builder: (context, state) => AddChallenge()),
+    GoRoute(path: "/allevents", builder: (context, state) => AllEvents()),
+    GoRoute(path: "/addevent", builder: (context, state) => AddEvent()),
   ]);
 }
 

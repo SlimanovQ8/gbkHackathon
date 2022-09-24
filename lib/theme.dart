@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 
 ThemeData myTheme = ThemeData(
   scaffoldBackgroundColor: Colors.white,
-  primaryColor: Color(0xFFf75600),
+  primaryColor: Color.fromARGB(255, 191, 0, 0),
   secondaryHeaderColor: Color(0xFF0c0f0a),
   dividerColor: Color(0xFFBFBFBF),
   // cardColor: Color.fromARGB(255, 255, 169, 123),
 
   // ICONS
   iconTheme: const IconThemeData(
-    color: Color(0xFFf75600),
+    color: Color.fromARGB(255, 191, 0, 0),
   ),
   colorScheme: ThemeData().colorScheme.copyWith(
-        primary: const Color(0xFFf75600),
+        primary: const Color.fromARGB(255, 191, 0, 0),
       ),
 
 // flaoting theme color
 
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: Color(0xFFf75600),
+    backgroundColor: Color.fromARGB(255, 191, 0, 0),
   ),
   // APP BAR THEME
   appBarTheme: const AppBarTheme(
@@ -32,7 +32,7 @@ ThemeData myTheme = ThemeData(
       letterSpacing: 0.75,
     ),
     iconTheme: IconThemeData(
-      color: Color(0xFFf75600),
+      color: Color.fromARGB(255, 191, 0, 0),
       size: 25,
     ),
     actionsIconTheme: IconThemeData(
@@ -47,13 +47,13 @@ ThemeData myTheme = ThemeData(
     backgroundColor: Colors.white,
     type: BottomNavigationBarType.fixed,
     selectedIconTheme: IconThemeData(
-      color: Color(0xFFf75600),
+      color: Color.fromARGB(255, 191, 0, 0),
     ),
     unselectedIconTheme: IconThemeData(
       color: Color(0xFF4c4c4c),
     ),
     selectedLabelStyle: TextStyle(
-      color: Color(0xFFf75600),
+      color: Color.fromARGB(255, 191, 0, 0),
       fontSize: 10,
     ),
     unselectedLabelStyle: TextStyle(
@@ -89,7 +89,7 @@ ThemeData myTheme = ThemeData(
     focusedBorder: OutlineInputBorder(
       borderSide: const BorderSide(
         width: 2,
-        color: Color(0xFFf75600),
+        color: Color.fromARGB(255, 191, 0, 0),
       ),
       borderRadius: BorderRadius.circular(5),
     ),
@@ -125,7 +125,7 @@ ThemeData myTheme = ThemeData(
 
     // smalled text for dates
     bodyText2: TextStyle(
-      color: Color(0xFFBFBFBF),
+      color: Color.fromARGB(255, 95, 95, 95),
       fontSize: 16,
     ),
   ),
