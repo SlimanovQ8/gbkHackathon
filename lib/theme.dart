@@ -101,7 +101,7 @@ ThemeData myTheme = ThemeData(
     // big headlines and titles
     headline1: TextStyle(
       color: Color(0xFF0c0f0a),
-      fontSize: 30,
+      fontSize: 35,
       fontWeight: FontWeight.bold,
     ),
 

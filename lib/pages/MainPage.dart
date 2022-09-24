@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gbk_hackathon/main.dart';
 
+import '../classes/CustomAnimatedBottomBar.dart';
 import 'loginPage.dart';
 
 class MainPage extends StatefulWidget {
@@ -111,7 +112,6 @@ class _MainPageState extends State<MainPage> {
           return <Widget>[
             SliverAppBar(
                 automaticallyImplyLeading: false,
-                backgroundColor: Colors.red,
                 //expandedHeight: 50, // or 215
                 floating: true,
                 snap: true,
@@ -129,23 +129,10 @@ class _MainPageState extends State<MainPage> {
                             children: [
                               Text(
                                 'Hi Family Name Here',
-                                style: TextStyle(
-                                  fontSize: 24, // this here equals 25.36
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromARGB(255, 255, 255, 255),
-                                ),
+
                               ),
                               Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.transparent,
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.menu,
-                                      color: Colors.transparent,
-                                    )),
+
                               ),
                             ],
                           ),
@@ -245,7 +232,7 @@ class _MainPageState extends State<MainPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
                       children: List.generate(
-                        7,
+                        8,
                         (index) => Container(
                           margin:
                               EdgeInsets.symmetric(vertical: 15, horizontal: 4),
@@ -258,10 +245,11 @@ class _MainPageState extends State<MainPage> {
                                   child: new CircleAvatar(
                                       maxRadius: 44,
                                       minRadius: 44,
-                                      child: Image.asset(
-                                        "assets/icons/event.png",
+                                      child: Image.asset( index == 7?
+                                        "assets/icons/add.png" : "assets/icons/event.png",
                                         width: 40,
                                         height: 40,
+                                        color: Theme.of(context).primaryColor,
                                       ),
                                       backgroundColor: Colors.white),
                                   padding:
@@ -273,7 +261,7 @@ class _MainPageState extends State<MainPage> {
                                   )),
                               Flexible(
                                 child: Padding(
-                                  child: Text("Events",
+                                  child: Text(index == 7? "Add Event" :"Events",
                                       style: const TextStyle(
                                           color: const Color(0xff000000),
                                           fontWeight: FontWeight.w500,
@@ -288,6 +276,7 @@ class _MainPageState extends State<MainPage> {
                           ),
                         ),
                       ),
+
                     ),
                   ],
                 ),
@@ -371,141 +360,52 @@ class _MainPageState extends State<MainPage> {
           ],
         ),
       ),
+      bottomNavigationBar: CustomAnimatedBottomBar(
+        containerHeight: 70,
+        backgroundColor: Colors.white,
+        selectedIndex: currentIndex,
+        showElevation: true,
+        itemCornerRadius: 12,
+        curve: Curves.ease,
+
+        onItemSelected: (index) => setState(() => currentIndex = index),
+        items: <BottomNavyBarItem>[
+          BottomNavyBarItem(
+            icon: Icon(Icons.home),
+            title: Text('home'),
+            activeColor: Theme.of(context).primaryColor,
+            inactiveColor: Theme.of(context).dividerColor,
+            textAlign: TextAlign.center,
+          ),
+          BottomNavyBarItem(
+            icon: Icon(Icons.event),
+            title: Text('Events'),
+            activeColor: Theme.of(context).primaryColor,
+            inactiveColor: Theme.of(context).dividerColor,
+            textAlign: TextAlign.center,
+          ),
+
+          BottomNavyBarItem(
+            icon: Icon(Icons.task),
+            title: Text(
+              'Challenges',
+            ),
+            activeColor: Theme.of(context).primaryColor,
+            inactiveColor: Theme.of(context).dividerColor,
+            textAlign: TextAlign.center,
+          ),
+          BottomNavyBarItem(
+            icon: Icon(Icons.settings),
+            title: Text('setting'),
+            activeColor: Theme.of(context).primaryColor,
+            inactiveColor: Theme.of(context).dividerColor,
+            textAlign: TextAlign.center,
+          ),
+        ],
+      )
+      ,
     );
+
   }
+  int currentIndex= 0;
 }
-// child: Container(
-//   decoration: new BoxDecoration(
-//   ),
-//   child: Card(
-//
-//     color: Colors.red,
-//
-//     clipBehavior: Clip.antiAlias,
-//     shape: RoundedRectangleBorder(
-//       borderRadius: BorderRadius.circular(12),
-//     ),
-//     elevation: 10,
-//     margin: EdgeInsets.all(7),
-//     child: Column(
-//       children: <Widget>[
-//         ListTile(
-//           leading:
-//           ImageIcon(
-//             AssetImage("assets/images/gbk-logo.png"),
-//
-//             size: 80,
-//             color: Colors.white,
-//           ),
-//           title: Text("Card Number " ,
-//
-//
-//
-//             style: TextStyle(
-//                 color: Colors.white,
-//                 fontSize: 20, fontWeight: FontWeight.bold),textAlign: TextAlign.left,),
-//           //      subtitle: ,
-//         ),
-//         Container(
-//           decoration: BoxDecoration(
-//             //shape: BoxShape.circle,
-//             //border: Border.all(color: Colors.black,width: 0.5),
-//             borderRadius: BorderRadius.circular(12),
-//           ),
-//           margin: EdgeInsets.all(12.5),
-//           padding: const EdgeInsets.all(1.0),
-//           child: Row(
-//             children: <Widget>[
-//               SizedBox(
-//                 width: 40,
-//               ),
-//               Expanded(
-//                 child: Column(
-//                     children:<Widget>
-//                     [ Text("Total balance",
-//                           textAlign: TextAlign.center,
-//                           style: TextStyle(fontSize: 15,
-//                             color: Colors.white,
-//                           )),
-//                       Row(
-//                           children:<Widget> [
-//                             SizedBox(
-//                               width: 25,
-//                             ),
-//                             Text("KD",
-//                                 textAlign: TextAlign.center,
-//                                 style: TextStyle(fontSize: 14,
-//                                   color: Colors.white,
-//                                 )),
-//                             SizedBox(
-//                               width: 3,
-//                             ),
-//                             GestureDetector(child: Icon(Icons.info_outline), onTap: (){
-//                               showDialog(
-//                                   context: context,
-//                                   builder: (BuildContext context) =>
-//                                       AlertDialog(
-//                                         backgroundColor: Color (0xff343b4b),
-//                                         title: Text("total balance", style: TextStyle(
-//
-//                                             color: Color(0xff5496F4)
-//                                         ),),
-//                                         content: Text("Total balance without applying the saving rules", style: TextStyle(
-//
-//                                             color: Color(0xff5496F4)
-//                                         ),),
-//                                         actions: [
-//
-//                                           TextButton(onPressed: () {
-//                                             Navigator.pop(context);
-//                                           },
-//
-//                                             child: Text("OK", style: TextStyle(
-//                                                 color: Colors.red
-//                                             ),),
-//                                           ),
-//                                         ],
-//                                       )
-//                               );
-//                             },)
-//
-//
-//                           ]
-//                       ),
-//                     ]
-//                 ),
-//               ),
-//               Expanded(
-//                 child: Column(
-//                     children:<Widget>
-//                     [ Text("Available balance",
-//                           textAlign: TextAlign.center,
-//                           style: TextStyle(fontSize: 15,
-//                             color: Colors.white,
-//                           )),
-//                       SizedBox(
-//                         width: 40,
-//                       ),
-//                       Row(
-//                           children:<Widget> [
-//                             //Icon(Icons.visibility_off),
-//
-//                             Text("KD",
-//                                 textAlign: TextAlign.center,
-//                                 style: TextStyle(fontSize: 14,
-//                                   color: Colors.white,
-//                                 )),
-//
-//
-//                           ]
-//                       ),
-//                     ]
-//                 ),
-//               )
-//             ],
-//           ),
-//         ),
-//
-//       ],
-//     ),
-//   ),

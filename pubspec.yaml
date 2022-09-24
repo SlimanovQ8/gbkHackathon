@@ -40,6 +40,7 @@ dependencies:
   go_router: ^3.1.1
   image_picker: ^0.8.5+3
   syncfusion_flutter_datepicker: ^20.2.50
+  animated_bottom_navigation_bar: ^1.1.0
 
 dev_dependencies:
   flutter_test:
